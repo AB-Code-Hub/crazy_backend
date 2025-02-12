@@ -1,0 +1,17 @@
+{
+  "name": "crazy-host",
+  "version": "1.0.0",
+  "description": "carzy video stream client",
+  "keywords": [
+    "javascript",
+    "backend",
+    "client"
+  ],
+  "license": "ISC",
+  "author": "Bilal Chaudhary",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
