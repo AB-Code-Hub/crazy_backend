@@ -4,7 +4,7 @@ import { User} from "../models/user.model.js";
 import { uploadOnCloudinary} from "../utils/cloudinary.js"
 import {ApiResponse} from "../utils/ApiResponse.js";
 
-const generateAccecsAndRefreshTokens =  async (userId) => {
+const generateAccessAndRefreshTokens =  async (userId) => {
      try{
      const user = await  User.findById(userId)
      const accessToken = user.generateAccessToken()
@@ -93,7 +93,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
      const {email, username, password} = req.body
 
-     if(!username || !email){
+     if(!(username || email)){
           throw  new ApiError(400, "Username or email is required")
      }
 
@@ -110,7 +110,9 @@ const loginUser = asyncHandler(async (req, res) => {
      if(!isPasswordValid){
           throw new ApiError(401, "Wrong Password")
      }
-     const {accessToken, refreshToken } = await  generateAccecsAndRefreshTokens(user._id)
+     const {accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id)
+     // console.log("Generated Access Token:", accessToken);
+     // console.log("Generated Refresh Token:", refreshToken);
 
      const loggedInUser = await  User.findById(user._id).select("-password -refreshToken")
 
