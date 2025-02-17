@@ -65,7 +65,7 @@ const userSchema = new Schema(
         return await bcrypt.compare(password, this.password)
     }
 
-userSchema.methods.generateAccessToken = function () {  // ❌ No async
+userSchema.methods.generateAccessToken = function () {  //  No async
     return jwt.sign(
         {
             _id: this._id,
@@ -80,7 +80,7 @@ userSchema.methods.generateAccessToken = function () {  // ❌ No async
     );
 };
 
-userSchema.methods.generateRefreshToken = function () {  // ❌ No async
+userSchema.methods.generateRefreshToken = function () {  //  No async
     return jwt.sign(
         {
             _id: this._id,
