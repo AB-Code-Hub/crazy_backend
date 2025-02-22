@@ -141,8 +141,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     await User.findByIdAndUpdate(
         req.user._id,
         {
-            $set: {
-                refreshToken: undefined
+            $unset: {
+                refreshToken: 1
             }
         },
         {
@@ -215,7 +215,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Wrong Password")
     }
 
-    await user.password = newPassword
+     user.password = newPassword
     await user.save({validateBeforeSave: false})
 
     return res
@@ -299,6 +299,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
         const {username} = req.params
+    console.log(username)
 
     if(!username.trim()) {
         throw  new ApiError(400, "No username find")
